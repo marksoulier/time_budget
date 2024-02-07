@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'y29$br=r$pjt2q_hqnua9tb-gm9ii$ihvel8zlp8g$bo-$$hd)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['django-env3.eba-3jbfuszg.us-west-2.elasticbeanstalk.com', '127.0.0.1', '*']
 
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'time_budget.urls'
@@ -74,23 +75,23 @@ WSGI_APPLICATION = 'time_budget.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'timedatabase',
-#         'USER': 'admin',
-#         'PASSWORD': 'Parr0tdr0ne',
-#         'HOST': 'time-database.c90aio8gg9bc.us-west-1.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
-#         'PORT': '3306',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'timedatabase',
+        'USER': 'admin',
+        'PASSWORD': 'Parr0tdr0ne',
+        'HOST': 'time-database.c90aio8gg9bc.us-west-1.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -104,6 +105,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'marksoulkid@gmail.com'  # Your Gmail address
 EMAIL_HOST_PASSWORD = 'ixhm uvmi iogn wkbb'     # Your Gmail password or app-specific password
+
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -147,7 +149,9 @@ LOGIN_REDIRECT_URL = '/index/'
 #Redirect to home page after logout
 LOGOUT_REDIRECT_URL = '/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage" # The default - so could be left out altogether
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'react_app/build/static'),
 ]
