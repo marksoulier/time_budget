@@ -72,12 +72,13 @@ from django.views.static import serve as static_serve
 from django.utils._os import safe_join
 
 # @login_required
-def serve_react(request, path, document_root=None):
+def serve_react(request, document_root=None):
     if not document_root or not os.path.isdir(document_root):
         # Log the error for debugging
         # logger.error(f"Invalid document_root: {document_root}")
         # Return a server error response or redirect to a custom error page
         return HttpResponseServerError("Server configuration error.")
+    path = "index.html"
     path = posixpath.normpath(path).lstrip("/")
     fullpath = Path(safe_join(document_root, path))
     # Check if the requested path is a file and exists
