@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['django-env3.eba-3jbfuszg.us-west-2.elasticbeanstalk.com', '127
 
 INSTALLED_APPS = [
     'timeapp',
+    'front_end',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -153,11 +154,8 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage" # 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'react_app/build/static'),
+    os.path.join(BASE_DIR, 'front_end/build/static'),
+    os.path.join(BASE_DIR, 'timeapp/static'),
 ]
 
 REACT_APP_BUILD_PATH = 'front_end/build/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'timeapp/static'),
-]

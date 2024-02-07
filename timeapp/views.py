@@ -71,12 +71,14 @@ from django.http import Http404, HttpResponseServerError
 from django.views.static import serve as static_serve
 from django.utils._os import safe_join
 
-def serve_react(request, path, document_root=None):
+# @login_required
+def serve_react(request, document_root=None):
     if not document_root or not os.path.isdir(document_root):
         # Log the error for debugging
         # logger.error(f"Invalid document_root: {document_root}")
         # Return a server error response or redirect to a custom error page
         return HttpResponseServerError("Server configuration error.")
+    path = "index.html"
     path = posixpath.normpath(path).lstrip("/")
     fullpath = Path(safe_join(document_root, path))
     # Check if the requested path is a file and exists
@@ -90,7 +92,7 @@ def serve_react(request, path, document_root=None):
             # logger.error(f"Missing index.html in document_root: {document_root}")
             # Return a 404 response or redirect to a custom error page
             return Http404("index.html not found.")
-        return static_serve(request, "index.html", document_root=document_root)
+    return static_serve(request, "index.html", document_root=document_root)
 
 
 
