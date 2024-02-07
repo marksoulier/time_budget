@@ -7,3 +7,5 @@ whitenoise==6.2.0
 openai
 #import mysqlclient
 mysqlclient
+#import rest_framework
+djangorestframework

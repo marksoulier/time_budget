@@ -16,13 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib import admin
-from django.urls import path, re_path
-from django.conf import settings
-from timeapp.views import serve_react
-
+from django.urls import path
 urlpatterns = [
-    # re_path(r"^(?P<path>.*)$", serve_react, {"document_root": settings.REACT_APP_BUILD_PATH}),
-    path('', include('timeapp.urls')),
     path('admin/', admin.site.urls),
-    # Catch-all pattern for serving the React app
+    path('', include('timeapp.urls')),
 ]
