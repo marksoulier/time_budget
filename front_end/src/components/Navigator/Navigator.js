@@ -10,7 +10,8 @@ const Navigator = () => {
                 <img src={logoImage} alt="Logo" className="logo-img" />
             </div>
             <ul className="nav-links">
-                <li><NavLink to="/index/profile" activeClassName="active">Go to Profile</NavLink></li>
+                <li><NavLink to="/index/dashboard" activeClassName="active">Dashboard</NavLink></li>
+                <li><NavLink to="/index/profile" activeClassName="active">Profile</NavLink></li>
                 <li><NavLink to="/index/subscribe" activeClassName="active">Subscribe</NavLink></li>
                 <li><NavLink to="/accounts/logout/" activeClassName="active">Logout</NavLink></li>
             </ul>

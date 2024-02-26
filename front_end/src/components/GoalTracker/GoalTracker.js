@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './GoalTracker.css'; // Assuming the CSS is saved in this file
 
+
 function GoalTracker() {
-    const [goals, setGoals] = useState([]);
+    const [goals, setGoals] = useState([
+        { id: Math.random().toString(), text: 'Exercise for 30 minutes', achieved: false }
+    ]);
     const [newGoal, setNewGoal] = useState('');
 
     const addGoal = () => {
@@ -52,4 +55,3 @@ function GoalTracker() {
 }
 
 export default GoalTracker;
-s

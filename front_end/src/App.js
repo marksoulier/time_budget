@@ -1,22 +1,18 @@
-import logo from './logo.svg';
 import Dashboard from './components/Dashboard/Dashboard';
 import Profile from './components/Profile/Profile';
-import Subscription from './components/Subscription/Subscription';
+import Subscribe from './components/Subscribe/Subscribe';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
-      <div>
-        <Routes>
-          <Route path="/index" element={<Navigate replace to="/" />} />
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/subscription" element={<Subscription />} />
-          {/* Fallback for any other URL */}
-          <Route path="*" element={<Navigate replace to="/" />} />
-        </Routes>
-      </div>
+      <Routes>
+        {/* Redirect from root to /index */}
+        <Route path="/" element={<Navigate replace to="/index/dashboard" />} />
+        <Route path="/index/dashboard" element={<Dashboard />} />
+        <Route path="/index/profile" element={<Profile />} />
+        <Route path="/index/subscribe" element={<Subscribe />} />
+      </Routes>
     </Router>
   );
 }
