@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addActivity, removeActivity } from '../../actions';
+import { addActivity, removeActivity } from '../../actions/activityActions';
 
 function ActivityTracker() {
     const [activityName, setActivityName] = useState('');
     const [timeSpent, setTimeSpent] = useState('');
-    const activities = useSelector(state => state.activities);
+    const activities = useSelector(state => state.activity.activities);
     const dispatch = useDispatch();
 
     const handleAddActivity = () => {

@@ -8,10 +8,11 @@ function App() {
     <Router>
       <Routes>
         {/* Redirect from root to /index */}
-        <Route path="/" element={<Navigate replace to="/index/dashboard" />} />
         <Route path="/index/dashboard" element={<Dashboard />} />
         <Route path="/index/profile" element={<Profile />} />
         <Route path="/index/subscribe" element={<Subscribe />} />
+        <Route path="/" element={<Navigate replace to="/index/dashboard" />} />
+        <Route path="/index" element={<Navigate replace to="/index/dashboard" />} />
       </Routes>
     </Router>
   );

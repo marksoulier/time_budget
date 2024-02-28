@@ -1,6 +1,12 @@
-import { createStore } from 'redux';
-import activityReducer from './reducers';
+// src/store.js
+import { createStore, applyMiddleware, compose } from 'redux';
+import rootReducer from './reducers';
 
-const store = createStore(activityReducer);
+const initialState = {};
+
+const store = createStore(
+    rootReducer,
+    initialState,
+);
 
 export default store;

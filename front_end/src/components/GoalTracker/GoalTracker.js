@@ -1,31 +1,24 @@
 import React, { useState } from 'react';
-import './GoalTracker.css'; // Assuming the CSS is saved in this file
+import { useDispatch, useSelector } from 'react-redux';
+import { addGoal, toggleGoalAchieved } from '../../actions/goalActions'; // Import your goal actions
+import './GoalTracker.css';
 
 
 function GoalTracker() {
-    const [goals, setGoals] = useState([
-        { id: Math.random().toString(), text: 'Exercise for 30 minutes', achieved: false }
-    ]);
-    const [newGoal, setNewGoal] = useState('');
+    const [newGoalText, setNewGoalText] = useState('');
+    const goals = useSelector(state => state.goal.goals); // Access goals from Redux store
+    const dispatch = useDispatch();
 
-    const addGoal = () => {
-        if (!newGoal.trim()) return;
-        const goal = {
-            id: Math.random().toString(),
-            text: newGoal,
-            achieved: false,
-        };
-        setGoals([...goals, goal]);
-        setNewGoal('');
+    const handleAddGoal = () => {
+        if (!newGoalText.trim()) return;
+        // Dispatch the action to add a goal
+        dispatch(addGoal({ id: Math.random().toString(), text: newGoalText, achieved: false }));
+        setNewGoalText('');
     };
 
-    const achieveGoal = (id) => {
-        setGoals(goals.map(goal => {
-            if (goal.id === id) {
-                return { ...goal, achieved: !goal.achieved };
-            }
-            return goal;
-        }));
+    const handleAchieveGoal = (id) => {
+        // Dispatch an action to toggle the 'achieved' state of the goal
+        dispatch(toggleGoalAchieved(id));
     };
 
     return (
@@ -35,7 +28,7 @@ function GoalTracker() {
                 {goals.map((goal) => (
                     <li key={goal.id} className={`goal ${goal.achieved ? 'achieved' : ''}`}>
                         {goal.text}
-                        <button onClick={() => achieveGoal(goal.id)} className="achieve-button">
+                        <button onClick={() => handleAchieveGoal(goal.id)} className="achieve-button">
                             {goal.achieved ? 'Undo' : 'Complete'}
                         </button>
                     </li>
@@ -45,10 +38,10 @@ function GoalTracker() {
                 <input
                     type="text"
                     placeholder="Add a new goal"
-                    value={newGoal}
-                    onChange={(e) => setNewGoal(e.target.value)}
+                    value={newGoalText}
+                    onChange={(e) => setNewGoalText(e.target.value)}
                 />
-                <button onClick={addGoal}>Add Goal</button>
+                <button onClick={handleAddGoal}>Add Goal</button>
             </div>
         </div>
     );

@@ -12,3 +12,4 @@ export const removeActivity = (id) => ({
     type: REMOVE_ACTIVITY,
     payload: id,
 });
+
