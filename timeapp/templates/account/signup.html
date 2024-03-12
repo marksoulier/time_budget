@@ -1,0 +1,38 @@
+{% extends 'timeapp/base_signin.html' %}
+
+{% load socialaccount %} <!-- Load the socialaccount template tags -->
+
+{% block title %}Sign Up - Time Budget{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-container">
+        <h2>Sign Up</h2>
+        <!-- Social Login Links -->
+        <div class="social-auth-links">
+            <pre>{{ socialaccount_providers|pprint }}</pre>
+            <p>Sign up with:</p>
+            {% load socialaccount %}
+            {% for provider in socialaccount_providers %}
+            <a href="{% provider_login_url provider.id method=" oauth2" %}">Login with {{ provider.name }}</a>
+            {% endfor %}
+        </div>
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                {{ field.errors }}
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="button bg-orange-500 rounded hover:bg-orange-700 transition duration-300"
+                style="color:white">
+                Sign up
+            </button>
+        </form>
+        <p>Already have an Account? <a href="{% url 'login' %}" class="text-orange-500 hover:text-orange-700">Sign
+                in</a></p>
+    </div>
+</div>
+{% endblock %}
