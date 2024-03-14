@@ -13,10 +13,16 @@ from .views import (
 from django.conf import settings
 from django.urls import re_path, include
 from timeapp.api_views import GoalsDreamsList, ActivityTrackingList
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("", home, name="home"),
     path("accounts/", include("allauth.urls")),
+    path(
+        "accounts/logout/",
+        auth_views.LogoutView.as_view(next_page="/accounts/login/"),
+        name="account_logout",
+    ),
     path("signup/", signup, name="signup"),
     path("login/", login_view, name="login"),
     re_path(

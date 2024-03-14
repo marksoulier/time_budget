@@ -45,24 +45,60 @@ INSTALLED_APPS = [
     "rest_framework",  # for api
     "corsheaders",  # for api
     # authenticaion
+    "django.contrib.sites",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-    "django.contrib.sites",
+    "allauth.socialaccount.providers.facebook",
 ]
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_QUERY_EMAIL = True
+SITE_ID = 2
 
-SOCIALACCOUNT_PROVIDERS = {"google": {"EMAIL_AUTHENTICATION": True}}
+# Google authentication
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+    },
+    "facebook": {
+        "METHOD": "oauth2",
+        "SCOPE": ["email", "public_profile"],
+        "AUTH_PARAMS": {"auth_type": "reauthenticate"},
+        "INIT_PARAMS": {"cookie": True},
+        "FIELDS": [
+            "id",
+            "email",
+            "name",
+            "first_name",
+            "last_name",
+            "verified",
+            "locale",
+            "timezone",
+            "link",
+            "gender",
+            "updated_time",
+        ],
+        "EXCHANGE_TOKEN": True,
+        "LOCALE_FUNC": lambda request: "en_US",
+        "VERIFIED_EMAIL": False,
+        "VERSION": "v7.0",
+    },
+}
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = (
-    "443267133087-6nfqf70g0koidhvga5ojcjj8cqvj8hqk.apps.googleusercontent.com"
-)
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
+# client id: 443267133087-6nfqf70g0koidhvga5ojcjj8cqvj8hqk.apps.googleusercontent.com
+# client secret: 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
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -76,7 +112,8 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
-SITE_ID = 1
+
+CSRF_COOKIE_HTTPONLY = False  # Be cautious with this setting
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
@@ -139,10 +176,14 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "marksoulkid@gmail.com"  # Your Gmail address
-EMAIL_HOST_PASSWORD = (
-    "ixhm uvmi iogn wkbb"  # Your Gmail password or app-specific password
-)
+# EMAIL_HOST_USER = "marksoulkid@gmail.com"  # Your Gmail address
+# EMAIL_HOST_PASSWORD = (
+# "ixhm uvmi iogn wkbb"  # Your Gmail password or app-specific password
+# )
+EMAIL_HOST_USER = "mark.soulier@timebudget.co"
+EMAIL_HOST_PASSWORD = "vblh umhf hoxu imyc"
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_REQUIRED = True
 
 
 AUTH_PASSWORD_VALIDATORS = [
