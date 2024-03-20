@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from keys import EMAIL_HOST_PASSWORD_PASS, DATABASE_PASSWORD
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -97,9 +98,6 @@ SOCIALACCOUNT_PROVIDERS = {
     },
 }
 
-# client id: 443267133087-6nfqf70g0koidhvga5ojcjj8cqvj8hqk.apps.googleusercontent.com
-# client secret: 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
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -153,7 +151,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "timedatabase",
         "USER": "admin",
-        "PASSWORD": "Parr0tdr0ne",
+        "PASSWORD": DATABASE_PASSWORD,
         "HOST": "time-database.c90aio8gg9bc.us-west-1.rds.amazonaws.com",  # Or an IP Address that your DB is hosted on
         "PORT": "3306",
     }
@@ -169,7 +167,6 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
-# gmail password: ixhm uvmi iogn wkbb
 
 # set up email server
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -178,10 +175,10 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 # EMAIL_HOST_USER = "marksoulkid@gmail.com"  # Your Gmail address
 # EMAIL_HOST_PASSWORD = (
-# "ixhm uvmi iogn wkbb"  # Your Gmail password or app-specific password
+# ""  # Your Gmail password or app-specific password
 # )
 EMAIL_HOST_USER = "mark.soulier@timebudget.co"
-EMAIL_HOST_PASSWORD = "vblh umhf hoxu imyc"
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD_PASS
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_REQUIRED = True
 
